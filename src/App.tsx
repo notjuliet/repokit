@@ -147,7 +147,7 @@ const Login: Component = () => {
           />
           <button
             onclick={() => loginBsky(loginInput())}
-            class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            class="rounded bg-blue-500 px-2 py-1 font-bold text-white hover:bg-blue-700"
           >
             Login
           </button>
@@ -261,7 +261,7 @@ const Fetch: Component = () => {
           <button
             type="button"
             onclick={() => fetchPage()}
-            class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+            class="rounded bg-blue-500 px-2 py-1 font-bold text-white hover:bg-blue-700"
           >
             Load More
           </button>
@@ -269,7 +269,7 @@ const Fetch: Component = () => {
         <button
           type="button"
           onclick={() => deleteRecords()}
-          class="rounded bg-red-500 px-4 py-2 font-bold text-white hover:bg-red-700"
+          class="rounded bg-red-500 px-2 py-1 font-bold text-white hover:bg-red-700"
         >
           Delete
         </button>
@@ -300,7 +300,7 @@ const Records: Component = () => {
   }
 
   return (
-    <div class="mt-6 flex flex-col sm:w-2/3 sm:flex-row sm:justify-center">
+    <div class="mt-6 flex flex-col sm:w-3/4 sm:max-w-[60rem] sm:flex-row sm:justify-center">
       <div class="sticky top-0 mb-3 mr-5 flex w-full flex-wrap justify-around border-b border-b-gray-400 bg-white pb-3 sm:top-3 sm:mb-0 sm:w-auto sm:flex-col sm:self-start sm:border-none">
         <div class="mt-3 min-w-36 sm:mb-2 sm:mt-0 sm:border-b sm:border-b-gray-300 sm:pb-2">
           <div class="flex items-center">
@@ -312,7 +312,7 @@ const Records: Component = () => {
                   true,
                 )
               }
-              class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+              class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
             >
               Select All
             </button>
@@ -324,7 +324,7 @@ const Records: Component = () => {
                   false,
                 )
               }
-              class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
+              class="mb-2 me-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
             >
               Unselect All
             </button>
