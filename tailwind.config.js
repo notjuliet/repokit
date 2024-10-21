@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 export default {
   content: [
     "./index.html",
@@ -6,6 +8,9 @@ export default {
   ],
   darkMode: "class",
   theme: {
+    fontFamily: {
+      mono: ["Fira Code", ...defaultTheme.fontFamily.mono],
+    },
     extends: {},
   },
 };

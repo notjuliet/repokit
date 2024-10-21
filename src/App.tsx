@@ -35,6 +35,7 @@ configureOAuth({
 type AtpRecord = {
   uri: string;
   record: string;
+  visible: boolean;
   toDelete: boolean;
 };
 
@@ -207,6 +208,7 @@ const Fetch: Component = () => {
       tmpRecords.push({
         record: JSON.stringify(record, null, 2),
         uri: record.uri,
+        visible: true,
         toDelete: false,
       });
     });
@@ -240,12 +242,12 @@ const Fetch: Component = () => {
   };
 
   return (
-    <div class="flex flex-col items-center space-y-1">
+    <div class="flex flex-col space-y-1">
       <Show when={!recordList.length}>
         <For each={collections()}>
           {(collection) => (
             <div
-              class="cursor-pointer text-blue-600 hover:underline"
+              class="cursor-pointer font-mono text-blue-600 hover:underline"
               onclick={() => {
                 currentCollection = collection;
                 fetchPage();
@@ -282,7 +284,6 @@ const Fetch: Component = () => {
 };
 
 const Records: Component = () => {
-  const [subtext, setSubtext] = createSignal("");
   const [deleteToggle, setDeleteToggle] = createSignal(false);
   const [selectedCount, setSelectedCount] = createSignal(0);
 
@@ -290,14 +291,14 @@ const Records: Component = () => {
     setSelectedCount(recordList.filter((record) => record.toDelete).length);
   });
 
-  function editRecords() {
+  const setVisible = (search: string) => {
     const range = recordList
       .map((record, index) => {
-        if (record.record.includes(subtext())) return index;
+        if (record.record.includes(search)) return index;
       })
       .filter((i) => i !== undefined);
-    setRecordList(range, "toDelete", true);
-  }
+    setRecordList(range, "visible", true);
+  };
 
   return (
     <div class="mt-6 flex flex-col sm:w-3/4 sm:max-w-[60rem] sm:flex-row sm:justify-center">
@@ -331,23 +332,16 @@ const Records: Component = () => {
           </div>
         </div>
         <div class="mt-3 min-w-36 sm:mb-2 sm:mt-0 sm:border-b sm:border-b-gray-300 sm:pb-2">
-          <form
-            onsubmit={(e) => {
-              e.preventDefault();
-              editRecords();
-            }}
-          >
-            <label for="subtext" class="ml-2 select-none">
-              Subtext:
-            </label>
-            <input
-              type="text"
-              id="subtext"
-              placeholder='"$type": "app.bsky.embed.images"'
-              class="mb-3 mt-1 border rounded-md px-2 py-1"
-              onChange={(e) => setSubtext(e.currentTarget.value)}
-            />
-          </form>
+          <label for="subtext" class="ml-2 select-none">
+            Subtext:
+          </label>
+          <input
+            type="text"
+            id="subtext"
+            placeholder="app.bsky.embed.images"
+            class="mb-3 mt-1 border rounded-md px-2 py-1"
+            onChange={(e) => setVisible(e.currentTarget.value)}
+          />
         </div>
         <div>
           <label class="mb-2 mt-1 inline-flex cursor-pointer items-center">
@@ -367,7 +361,7 @@ const Records: Component = () => {
         </div>
       </div>
       <div class="sm:min-w-96">
-        <For each={recordList}>
+        <For each={recordList.filter((x) => x.visible)}>
           {(record, index) => (
             <Show when={deleteToggle() ? record.toDelete : true}>
               <div class="mb-2 flex items-center border-b pb-2">
@@ -388,7 +382,7 @@ const Records: Component = () => {
                 </div>
                 <div classList={{ "bg-red-300": record.toDelete }}>
                   <label for={"record" + index()} class="flex flex-col">
-                    <pre class="text-wrap break-all text-xs">
+                    <pre class="text-wrap break-all text-sm">
                       {record.record}
                     </pre>
                   </label>
